@@ -1,0 +1,77 @@
+Valid palindrome
+
+Approach 1
+Using extra space
+T.C = O(n)		S.C = O(1)
+
+bool isValid(string s)
+{
+	int n = s.length();
+	int i = 0;      int j = n-1;
+	while(i <= j)
+	{
+		if(s[i] != s[j])
+		{
+			return false;
+		}
+		i++;    j--;
+	}
+	return true;
+}
+
+
+bool isPalindrome(string s) {
+	string res = "";
+	int i = 0;
+
+	while(i < s.length())
+	{
+		if((s[i] >= 'a' && s[i] <='z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9'))
+		{
+			res += tolower(s[i]);
+			i++;
+		}
+		else{
+			i++;
+		}
+	}
+	return isValid(res);
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Approach 2 - single traversal 
+
+T.C = O(n)		S.C = O(1)
+
+bool isalphanum(char ch)
+{
+	if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool isPalindrome(string s) {
+	int n = s.length();
+	int i = 0;      int j = n-1;
+
+	while(i <= j)
+	{
+		while(i <= j && !isalphanum(s[i]))
+		{
+			i++;
+		}
+		while(i < j && !isalphanum(s[j]))
+		{
+			j--;
+		}
+		if(i <= j && tolower(s[i]) != tolower(s[j]))
+		{
+			return false;
+		}
+		i++;    j--;
+	}
+	return true;
+}
