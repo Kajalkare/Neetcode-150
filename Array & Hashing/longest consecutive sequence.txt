@@ -1,0 +1,59 @@
+Longest consecutive sequence
+
+Approach 1 - Sort the array
+T.C = O(nlogn)		S.C = O(1)
+
+Approach 2 - conside each element as a starting point and count consecutive ele  -- using hashmap
+T.C = O(n*n)	S.C = O(n)
+
+int longestConsecutive(vector<int>& nums) {
+	int n = nums.size();
+	unordered_map<int, int>mp;
+	for(int i=0; i<n; i++)
+	{
+		mp[nums[i]]++;
+	}
+	int ans = 0;
+	for(int i=0; i<n; i++)
+	{
+		int val = nums[i];  int count = 0;
+		while(mp.find(val) != mp.end())
+		{
+			count++;    val++;
+		}
+		ans = max(ans, count);
+	}
+	return ans;
+}
+
+------------------------------------------------------------------------------------------------------
+
+Approach 3 - using hashamp
+T.C = O(n)		S.C = O(n)
+
+int longestConsecutive(vector<int>& nums) {
+	int n = nums.size();
+	unordered_map<int, int>mp;
+	for(int i=0; i<n; i++)
+	{
+		mp[nums[i]]++;
+	}
+	int ans = 0;
+	for(int i=0; i<n; i++)
+	{
+		if(mp.find(nums[i]-1) != mp.end())
+		{
+			continue;
+		}
+		else{
+			int val = nums[i];  int count = 0;
+			while(mp.find(val) != mp.end())
+			{
+				count++;
+				val++;
+			}
+			ans = max(ans, count);
+		}
+	}
+	return ans;
+}
