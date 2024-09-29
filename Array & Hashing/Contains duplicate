@@ -1,0 +1,53 @@
+Contains duplicate
+
+APproach 1 - Brute force
+Using two loops
+T.C = O(n*n)	S.C = O(1)
+
+bool containsDuplicate(vector<int>& nums) {
+	int n = nums.size();
+	for(int i=0; i<n; i++)
+	{
+		for(int j=i+1; j<n; j++)
+		{
+			if(nums[i] == nums[j])
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+Approach 2 - using sorting
+T.C = O(nlogn)		S.C = O(1)
+
+bool containsDuplicate(vector<int>& nums) {
+	int n = nums.size();
+	sort(nums.begin(), nums.end());
+	for(int i=0; i<n-1; i++)
+	{
+		if(nums[i] == nums[i+1])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+Approach 3 - Using hasmap
+T.C = O(n)			S.C = O(n)
+
+bool containsDuplicate(vector<int>& nums) {
+	int n = nums.size();
+	unordered_map<int, int>mp;
+	for(int i=0; i<n; i++)
+	{
+		if(mp.find(nums[i]) != mp.end())
+		{
+			return true;
+		}
+		mp[nums[i]]++;
+	}
+	return false;
+}
