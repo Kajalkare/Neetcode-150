@@ -1,0 +1,40 @@
+Container with most water
+
+Approach 1 - Brute force
+- Two loops
+T.C = O(n^2)	S.C = O(1)
+
+int maxArea(vector<int>& nums) {
+	int n = nums.size();
+	int ans = INT_MIN;
+	for(int i=0; i<n; i++)
+	{
+		for(int j=0; j<n; j++)
+		{
+			ans = max(ans, min(nums[i], nums[j])*(j-i));
+		}
+	}
+	return ans;
+}
+
+Approach - Two pointer
+T.C = O(n)	S.C = O(1)
+
+int maxArea(vector<int>& nums) {
+	int n = nums.size();
+	int l = 0;      int r = n-1;
+	int ans = INT_MIN;
+
+	while(l <= r)
+	{
+		ans = max(ans, min(nums[l], nums[r])*(r-l));
+		if(nums[l] < nums[r])
+		{
+			l++;
+		}    
+		else{
+			r--;
+		}
+	}
+	return ans;
+}
